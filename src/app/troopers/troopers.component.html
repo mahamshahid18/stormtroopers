@@ -1,7 +1,9 @@
 <h1>All Troopers</h1>
 
 <ul>
-  <li *ngFor='let trooper of troopers'>
+  <li *ngFor='let trooper of troopers'
+    (click)='selectTrooper(trooper)'
+  >
     {{ trooper.name }}
   </li>
 </ul>

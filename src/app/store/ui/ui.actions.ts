@@ -1,24 +1,22 @@
 import { Action } from '@ngrx/store';
+import { UIState } from './ui.model';
 
-export const uiActions = {
-    IS_TROOPER_SELECTED: '[UI] Is Trooper Selected',
-    SELECTED_TROOPER_ID: '[UI] Selected Trooper Id',
-    TROOPER_IN_EDIT_STATE: '[UI] Trooper in Edit State'
+export const UIActionTypes = {
+    SelectTrooper: '[UI] Select Trooper',
+    ClearSelection: '[UI] Clear Selected Trooper',
+    EditTrooperDetails: '[UI] Edit Trooper Details'
 };
 
-export class IsTrooperSelected implements Action {
-    readonly type = uiActions.IS_TROOPER_SELECTED;
+export class SelectTrooper implements Action {
+    readonly type = UIActionTypes.SelectTrooper;
 }
 
-export class SelectedTrooperId implements Action {
-    readonly type = uiActions.SELECTED_TROOPER_ID;
-
-    constructor(public trooperId: number) {}
+export class ClearSelection implements Action {
+    readonly type = UIActionTypes.ClearSelection;
 }
 
-export class TrooperInEditState implements Action {
-    readonly type = uiActions.TROOPER_IN_EDIT_STATE;
+export class EditTrooperDetails implements Action {
+    readonly type = UIActionTypes.EditTrooperDetails;
 }
 
-export type UIActions = IsTrooperSelected | SelectedTrooperId | TrooperInEditState;
-
+export type UIActions = SelectTrooper | ClearSelection | EditTrooperDetails;

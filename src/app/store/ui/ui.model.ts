@@ -1,6 +1,5 @@
 
-export interface UI {
+export interface UIState {
     isTrooperSelected: boolean;
-    selectedTrooperId: number;
-    trooperInEditState: boolean
+    isTrooperInEditState: boolean
 }
