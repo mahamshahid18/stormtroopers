@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { AppState, getSelectedTrooper } from '../store/app.reducer';
-import { isTrooperSelected } from '../store/app.reducer';
-import { ClearSelection } from '../store/ui/ui.actions';
-import { Trooper } from '../store/troopers/trooper.model';
 import { Observable } from 'rxjs';
+
+import { AppState, getSelectedTrooper, isTrooperSelected } from '../store/app.reducer';
+
+import { ClearSelection } from '../store/ui/ui.actions';
+
+import { Trooper } from '../store/troopers/trooper.model';
+import { ClearTrooper } from '../store/troopers/troopers.actions';;
 
 @Component({
   selector: 'app-trooper',
@@ -24,7 +27,11 @@ export class TrooperComponent implements OnInit {
   }
 
   clear() {
-    this.store.dispatch(new ClearSelection);
+    // trooper
+    this.store.dispatch(new ClearTrooper());
+  
+    // ui
+    this.store.dispatch(new ClearSelection());
   }
 
 }

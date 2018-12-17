@@ -1,9 +1,18 @@
-<h1>All Troopers</h1>
+<div>
+  <input type="text" [(ngModel)]='newTrooper.name' placeholder="Add trooper name">
+  <input type="text" [(ngModel)]='newTrooper.unit' placeholder="Add trooper unit">
+  <input type="text" [(ngModel)]='newTrooper.rating' placeholder="Add trooper rating">
+  <button (click)='addTrooper(newTrooper)'>Add Trooper</button>
+</div>
 
-<ul>
-  <li *ngFor='let trooper of troopers'
-    (click)='selectTrooper(trooper)'
-  >
-    {{ trooper.name }}
-  </li>
-</ul>
+<div>
+  <h1>All Troopers</h1>
+  
+  <ul>
+    <li *ngFor='let trooper of troopers$ | async'
+      (click)='selectTrooper(trooper)'
+    >
+      {{ trooper.name }}
+    </li>
+  </ul>
+</div>

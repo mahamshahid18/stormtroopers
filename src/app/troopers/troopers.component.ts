@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { AppState } from '../store/app.reducer';
+import { Store, select } from '@ngrx/store';
 
-import { UIActionTypes, SelectTrooperUI } from '../store/ui/ui.actions';
+import { AppState, getAllTroopers } from '../store/app.reducer';
 
-import { SelectTrooper } from '../store/troopers/troopers.actions';
+import { SelectTrooperUI } from '../store/ui/ui.actions';
+
+import { SelectTrooper, AddTrooper } from '../store/troopers/troopers.actions';
 import { Trooper } from '../store/troopers/trooper.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-troopers',
@@ -13,30 +15,33 @@ import { Trooper } from '../store/troopers/trooper.model';
   styleUrls: ['./troopers.component.scss']
 })
 export class TroopersComponent implements OnInit {
-
-  troopers: Trooper[] = [{
-      name: 'FN2187',
-      unit: 'xyz',
-      rating: 2
-    }, {
-      name: 'FN2147',
-      unit: 'xyz',
-      rating: 4
-    }, {
-      name: 'PH227',
-      unit: 'elite',
-      rating: 5
-    }
-  ];
+  newTrooper: Trooper = {
+    name: null,
+    rating: null,
+    unit: null,
+  };
+  troopers$: Observable<Trooper[]>;
 
   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
+    this.troopers$ = this.store.pipe(select(getAllTroopers));
   }
 
   selectTrooper(trooper: Trooper) {
     this.store.dispatch(new SelectTrooperUI())
     this.store.dispatch(new SelectTrooper(trooper));
+  }
+
+  addTrooper(trooper) {
+    this.store.dispatch(new AddTrooper({...this.newTrooper}));
+    this.clearForm();
+  }
+
+  clearForm() {
+    this.newTrooper.name = null;
+    this.newTrooper.unit = null;
+    this.newTrooper.rating = null;
   }
 
 }
