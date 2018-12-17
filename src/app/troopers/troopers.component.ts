@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.reducer';
-import { UIActionTypes, SelectTrooper } from '../store/ui/ui.actions';
-// import { UIState } from '../store/ui/ui.model';
+
+import { UIActionTypes, SelectTrooperUI } from '../store/ui/ui.actions';
+
+import { SelectTrooper } from '../store/troopers/troopers.actions';
+import { Trooper } from '../store/troopers/trooper.model';
 
 @Component({
   selector: 'app-troopers',
@@ -11,7 +14,7 @@ import { UIActionTypes, SelectTrooper } from '../store/ui/ui.actions';
 })
 export class TroopersComponent implements OnInit {
 
-  troopers = [{
+  troopers: Trooper[] = [{
       name: 'FN2187',
       unit: 'xyz',
       rating: 2
@@ -31,16 +34,9 @@ export class TroopersComponent implements OnInit {
   ngOnInit() {
   }
 
-  selectTrooper(trooper) {
-    // console.log(trooper);
-    // this.store.dispatch({ 
-    //   type: UIActionTypes.SelectTrooper,
-    //   payload: {
-    //     isTrooperSelected: true,
-    //     isTrooperInEditState: false
-    //   }
-    // });
-    this.store.dispatch(new SelectTrooper());
+  selectTrooper(trooper: Trooper) {
+    this.store.dispatch(new SelectTrooperUI())
+    this.store.dispatch(new SelectTrooper(trooper));
   }
 
 }

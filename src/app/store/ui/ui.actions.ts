@@ -7,7 +7,7 @@ export const UIActionTypes = {
     EditTrooperDetails: '[UI] Edit Trooper Details'
 };
 
-export class SelectTrooper implements Action {
+export class SelectTrooperUI implements Action {
     readonly type = UIActionTypes.SelectTrooper;
 }
 
@@ -19,4 +19,4 @@ export class EditTrooperDetails implements Action {
     readonly type = UIActionTypes.EditTrooperDetails;
 }
 
-export type UIActions = SelectTrooper | ClearSelection | EditTrooperDetails;
+export type UIActions = SelectTrooperUI | ClearSelection | EditTrooperDetails;
